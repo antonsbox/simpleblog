@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config>
+    <api2>
+        <resource_groups>
+            <antonsbox_simpleblog translate="title" module="Antonsbox_Simpleblog">
+                <title>Simple Blog REST</title>
+                <sort_order>30</sort_order>
+                <children>
+                    <antonsbox_simpleblog translate="title" module="Antonsbox_Simpleblog">
+                        <title>My Api</title>
+                    </antonsbox_simpleblog>
+                </children>
+            </antonsbox_simpleblog>
+        </resource_groups>
+        <resources>
+            <antonsbox_simpleblog translate="title" module="Antonsbox_Simpleblog">
+                <group>antonsbox_simpleblog</group>
+                <model>simpleblog/api2_restapi</model>
+                <working_model>simpleblog/api2_restapi</working_model>
+                <title>Simple Blog Posts</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <guest>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </guest>
+                </privileges>
+                <attributes translate="post_id title content created" module="Antonsbox_Simpleblog">
+                    <post_id>Post ID</post_id>
+                    <title>Post Title</title>
+                    <content>Post Content</content>
+                    <created>Time Created</created>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/simpleblog/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/simpleblog</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </antonsbox_simpleblog>
+        </resources>
+    </api2>
+</config>
