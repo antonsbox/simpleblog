@@ -47,14 +47,30 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
 //
 //        return $this->_getLocation($post);
 //    }
-//    public function _retrieve(array $data)
-//    {
-//        $collection = Mage::getModel("simpleblog/post");
-//        $post = $collection->load()->toArray();
-//        $size = $collection->getSize();
-//        $postCount=$size;
-//        return $postCount;
-//
-//        return $post;
-//    }
+    public function _retrieve(array $data)
+    {
+
+
+        return json_encode('YEEES!!! It`s a _retrive!!');
+    }
+
+    public function _retrieveCollection()
+    {
+        $collection = Mage::getModel("simpleblog/post")->getCollection()->load();
+        $collection->setOrder('created', 'DESC');
+        foreach ($collection as $item) {
+        }
+        return $collection;
+    }
+
+    public function _delete()
+    {
+        return json_encode('YEEES!!! It`s a _delete!!');
+    }
+
+    public function _update()
+    {
+        return json_encode('YEEES!!! It`s a _update!!');
+    }
+
 }
