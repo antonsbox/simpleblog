@@ -46,8 +46,8 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
 
             $post_to_encode = array();
             $post_to_encode[] = array(
-                'id' => $postId,
-                'name' => $title,
+                'post_id' => $postId,
+                'title' => $title,
                 'content' => $content,
                 'created' => $created);
             array_push($outputArray, $post_to_encode);
@@ -69,22 +69,36 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
 
     public function _create(array $data)
     {
+        $currentTimestamp = Mage::getModel('core/date')->timestamp(time());
 //        $postId = $data['id'];
 //        $postTitle = $data['title'];
 //        $postContent = $data['content'];
 //        $postCreated = $data['created'];
-
-        $post = Mage::getModel("simpleblog/post");
-
 //        $post->setId($postId);
 //        $post->setTitle($postTitle);
 //        $post->setContent($postContent);
-        $currentTimestamp = Mage::getModel('core/date')->timestamp(time());
-        $post->setCreated(date('Y-m-d H:i:s', $currentTimestamp));
-        $post->setTitle('From API');
-        $post->setContent('CONTENT FROM API');
-        $post->save();
+        foreach ($data as $item) {
+            $post = Mage::getModel("simpleblog/post");
+            $post->setCreated(date('Y-m-d H:i:s', $currentTimestamp));
+            $post->setTitle($item[0]);
+            $post->setContent('CONTENT FROM API');
+            $post->save();
+            Mage::log($item);
+        }
 
         return $this->_getLocation($post);
+    }
+
+    public function _multiCreate(array $data)
+    {
+        $currentTimestamp = Mage::getModel('core/date')->timestamp(time());
+        foreach ($data as $item) {
+            $post = Mage::getModel("simpleblog/post");
+            $post->setCreated(date('Y-m-d H:i:s', $currentTimestamp));
+            $post->setTitle($item['title']);
+            $post->setContent($item['content']);
+            $post->save();
+            Mage::log($item);
+        }
     }
 }
