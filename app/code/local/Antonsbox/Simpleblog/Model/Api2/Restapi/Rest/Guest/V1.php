@@ -39,7 +39,7 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
         $collection->setOrder('created', 'DESC');
         $outputArray = array();
         foreach ($collection as $item) {
-            $postId = $item->getId();
+            $postId = $item->getPostId();
             $title = $item->getTitle();
             $content = $item->getContent();
             $created = $item->getCreated();
@@ -94,7 +94,8 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
         $currentTimestamp = Mage::getModel('core/date')->timestamp(time());
         foreach ($data as $item) {
             $post = Mage::getModel("simpleblog/post");
-            $post->setCreated(date('Y-m-d H:i:s', $currentTimestamp));
+//            $post->setCreated(date('Y-m-d H:i:s', $currentTimestamp));
+            $post->setCreated($item['created']);
             $post->setTitle($item['title']);
             $post->setContent($item['content']);
             $post->save();
