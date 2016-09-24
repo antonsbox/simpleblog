@@ -46,7 +46,7 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
 
             $post_to_encode = array();
             $post_to_encode[] = array(
-                'post_id' => $postId,
+                'id' => $postId,
                 'title' => $title,
                 'content' => $content,
                 'created' => $created);
