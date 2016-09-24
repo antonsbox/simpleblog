@@ -35,13 +35,11 @@
                 </attributes>
                 <routes>
                     <route_entity>
-                        <route>/simpleblog</route>
-                        <action_type>entity</action_type>
                         <route>/simpleblog/:id</route>
                         <action_type>entity</action_type>
                     </route_entity>
                     <route_collection>
-                        <route>/simpleblog/read</route>
+                        <route>/simpleblog/posts/multi</route>
                         <action_type>collection</action_type>
                     </route_collection>
                 </routes>
