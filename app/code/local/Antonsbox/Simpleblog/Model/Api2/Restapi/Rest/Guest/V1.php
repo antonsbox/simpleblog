@@ -3,7 +3,7 @@
 class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
     extends Antonsbox_Simpleblog_Model_Api2_Restapi
 {
-    public function _retrieve(array $data)
+    public function _retrieve()
     {
         $param = $this->getRequest()->getParam('id');
         $collection = Mage::getModel("simpleblog/post")->getCollection();
@@ -48,16 +48,15 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
         return $ecoded_data;
     }
 
-    public function _delete(array $data)
+    public function _delete()
     {
         $param = $this->getRequest()->getParam('id');
         $post = Mage::getModel("simpleblog/post")->load($param);
         $post->setId($param)->delete();
     }
 
-    public function _multiDelete(array $data)
+    public function _multiDelete($data)
     {
-        Mage::log('_multiDelete');
         foreach ($data as $item) {
             $post = Mage::getModel("simpleblog/post")->load($item['post_id']);
             $post->setId($item['post_id'])->delete();

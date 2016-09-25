@@ -215,7 +215,7 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     headers.append('Content-Type', 'application/json; charset=utf-8');
                     var opts = new http_1.RequestOptions();
                     opts.headers = headers;
-                    this.http.delete(location.origin + 'api/rest/simpleblog/' + id.toString(), opts)
+                    this.http.delete(location.origin + '/api/rest/simpleblog/' + id.toString(), opts)
                         .subscribe(function (res) {
                         // this.response = res.json();
                     });

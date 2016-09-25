@@ -1,22 +1,31 @@
 <head>
     <meta charset="UTF-8">
+    <meta name="title" content="<?php echo Mage::getStoreConfig('simpleblog_options/config/meta_title'); ?>">
+    <meta name="description" content="<?php echo Mage::getStoreConfig('simpleblog_options/config/meta_description'); ?>">
+    <meta name="keywords" content="<?php echo Mage::getStoreConfig('simpleblog_options/config/meta_keywords'); ?>">
+    <meta name="author" content="<?php echo Mage::getStoreConfig('simpleblog_options/config/author'); ?>">
+
+    <meta title="">
+    <meta keywords ="">
+    <meta title="">
     <title>Simple Blog</title>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/es6-shim.min.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/zone.min.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/Reflect.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/system.src.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/ckeditor/ckeditor.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/common.umd.min.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/core.umd.min.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/http.umd.min.js"></script>
-    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/platform-browser-dynamic.umd.min.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/es6-shim.min.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/zone.min.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/Reflect.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/system.src.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/ckeditor/ckeditor.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/common.umd.min.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/core.umd.min.js"></script>
+    <script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/http.umd.min.js"></script>
+    <script
+        src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/platform-browser-dynamic.umd.min.js"></script>
     <link rel="stylesheet" type="text/css"
-          href="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/css/semantic.min.css">
+          href="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/css/semantic.min.css">
 </head>
 <body>
-<script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/systemjs.config.js"></script>
+<script src="<?php echo Mage::getBaseUrl('skin'); ?>frontend/base/default/js/systemjs.config.js"></script>
 <script>
-    System.import('<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/blog.js')
+    System.import('<?php echo Mage::getBaseUrl('skin');?>frontend/base/default/js/blog.js')
         .then(null, console.error.bind(console));
 </script>
 <simple-blog></simple-blog>

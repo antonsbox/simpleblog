@@ -5,26 +5,6 @@
             <version>0.1.0</version>
         </Antonsbox_Simpleblog>
     </modules>
-    <admin>
-        <routers>
-            <simpleblog_admin>
-                <use>admin</use>
-                <args>
-                    <module>Antonsbox_Simpleblog</module>
-                    <frontName>simpleblog_admin</frontName>
-                </args>
-            </simpleblog_admin>
-        </routers>
-    </admin>
-    <adminhtml>
-        <menu>
-            <simpleblog module="simpleblog">
-                <title>Blog</title>
-                <sort_order>77</sort_order>
-                <action>simpleblog_admin/adminhtml_blog</action>
-            </simpleblog>
-        </menu>
-    </adminhtml>
     <frontend>
         <layout>
             <updates>
@@ -59,6 +39,10 @@
                 <class>Antonsbox_Simpleblog_Model</class>
                 <resourceModel>simpleblog_resource</resourceModel>
             </simpleblog>
+            <!--***********-->
+            <params>
+                <class>Antonsbox_Simpleblog_Model_Params</class>
+            </params>
             <simpleblog_resource>
                 <class>Antonsbox_Simpleblog_Model_Resource</class>
                 <entities>
