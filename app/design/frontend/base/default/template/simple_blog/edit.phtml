@@ -1,25 +1,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Simple Blog</title>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/es6-shim.min.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/zone.min.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/Reflect.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/system.src.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/ckeditor/ckeditor.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/common.umd.min.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/core.umd.min.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/http.umd.min.js"></script>
-    <script src="http://magento1.tst/skin/frontend/base/default/js/platform-browser-dynamic.umd.min.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/es6-shim.min.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/zone.min.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/Reflect.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/system.src.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/ckeditor/ckeditor.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/common.umd.min.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/core.umd.min.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/http.umd.min.js"></script>
+    <script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/platform-browser-dynamic.umd.min.js"></script>
     <link rel="stylesheet" type="text/css"
-          href="http://magento1.tst/skin/frontend/base/default/css/semantic.min.css">
+          href="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/css/semantic.min.css">
 </head>
 <body>
-<script src="http://magento1.tst/skin/frontend/base/default/js/systemjs.config.js"></script>
+<script src="<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/systemjs.config.js"></script>
 <script>
-    System.import('http://magento1.tst/skin/frontend/base/default/js/blog.js')
+    System.import('<?php echo  Mage::getBaseUrl('skin');?>frontend/base/default/js/blog.js')
         .then(null, console.error.bind(console));
 </script>
-<?php echo Mage::getBaseDir('skin');?>
 <simple-blog></simple-blog>
 
 </body>
