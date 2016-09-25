@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af5bbcc3-3bb3-4aa7-8964-e94107ce71f4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/design/frontend/base/default/template/simple_blog/edit.phtml" afterPath="$PROJECT_DIR$/app/design/frontend/base/default/template/simple_blog/edit.phtml" />
-    </list>
+    <list default="true" id="af5bbcc3-3bb3-4aa7-8964-e94107ce71f4" name="Default" comment="" />
     <ignored path="simpleblog-test.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -643,12 +641,12 @@
       <workItem from="1474707828559" duration="3794000" />
       <workItem from="1474718329049" duration="42000" />
       <workItem from="1474718514494" duration="11193000" />
-      <workItem from="1474736491162" duration="21900000" />
+      <workItem from="1474736491162" duration="21973000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87726000" />
+    <option name="totallyTimeSpent" value="87799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="7" />
