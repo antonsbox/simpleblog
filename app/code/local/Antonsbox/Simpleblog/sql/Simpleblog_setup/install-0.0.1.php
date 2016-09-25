@@ -1,7 +1,7 @@
 <?php
 
 $installer = $this;
-$tablePosts= $installer->getTable('simpleblog/table_posts');
+$tablePosts= $installer->getTable('simpleblog/table_post');
 
 //die($tablePosts);
 

@@ -28,9 +28,9 @@
     <frontend>
         <layout>
             <updates>
-                <simpleblog>
+                <simleblog>
                     <file>simple_blog.xml</file>
-                </simpleblog>
+                </simleblog>
             </updates>
         </layout>
         <routers>
@@ -69,11 +69,11 @@
             </simpleblog_resource>
         </models>
         <resources>
-            <simpleblog_setup>
+            <Simpleblog_setup>
                 <setup>
                     <module>Antonsbox_Simpleblog</module>
                 </setup>
-            </simpleblog_setup>
+            </Simpleblog_setup>
         </resources>
     </global>
 </config>

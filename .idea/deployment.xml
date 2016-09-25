@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="http://magento1.tst/">
+  <component name="PublishConfigData" serverName="http://testmagento.tst/">
     <serverData>
-      <paths name="http://magento1.tst/">
+      <paths name="http://testmagento.tst/">
         <serverdata>
           <mappings>
             <mapping deploy="\" local="$PROJECT_DIR$" web="/" />

@@ -6,9 +6,9 @@ class Antonsbox_Simpleblog_TestController extends Mage_Core_Controller_Front_Act
     public function indexAction()
     {
         $this->loadLayout();
-        $layoutHandles = $this->getLayout()->getUpdate()->getHandles();
-        echo '<pre>' . print_r($layoutHandles, true) . '</pre>';
-        echo 'Index';
+//        $layoutHandles = $this->getLayout()->getUpdate()->getHandles();
+//        echo '<pre>' . print_r($layoutHandles, true) . '</pre>';
+//        echo 'Index';
         $this->renderLayout();
     }
 

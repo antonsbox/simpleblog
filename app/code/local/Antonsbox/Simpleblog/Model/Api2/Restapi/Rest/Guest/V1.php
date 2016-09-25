@@ -5,8 +5,7 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
 {
     public function _retrieve(array $data)
     {
-        $param= $this->getRequest()->getParam('id');
-        Mage::log('param='.$param);
+        $param = $this->getRequest()->getParam('id');
         $collection = Mage::getModel("simpleblog/post")->getCollection();
         $collection->addFieldToFilter('post_id', array('eq' => $param));
         $outputArray = array();
@@ -23,8 +22,6 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
                 'created' => $created);
             array_push($outputArray, $post_to_encode);
         }
-
-        Mage::log($outputArray);
         $ecoded_data = json_encode($outputArray);
         return $ecoded_data;
     }
@@ -53,26 +50,32 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
 
     public function _delete(array $data)
     {
-        Mage::log('_delete');
-        return json_encode('YEEES!!! It`s a _delete!!');
+        $param = $this->getRequest()->getParam('id');
+        $post = Mage::getModel("simpleblog/post")->load($param);
+        $post->setId($param)->delete();
     }
 
     public function _multiDelete(array $data)
     {
         Mage::log('_multiDelete');
-        return json_encode('YEEES!!! It`s a _multiDelete!!');
+        foreach ($data as $item) {
+            $post = Mage::getModel("simpleblog/post")->load($item['post_id']);
+            $post->setId($item['post_id'])->delete();
+        }
     }
 
     public function _update(array $data)
     {
-        Mage::log('_update');
-        return json_encode('YEEES!!! It`s a _update!!');
+        $post = Mage::getModel("simpleblog/post")->load($data['post_id'])->addData($data);
+        $post->setId($data['post_id'])->save();
     }
 
     public function _multiUpdate(array $data)
     {
-        Mage::log('_multiUpdate');
-        return json_encode('YEEES!!! It`s a _multiUpdate!!');
+        foreach ($data as $item) {
+            $post = Mage::getModel("simpleblog/post")->load($item['post_id'])->addData($item);
+            $post->setId($item['post_id'])->save();
+        }
     }
 
     public function _create(array $data)
@@ -82,11 +85,10 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
         $post->setTitle($data['title']);
         $post->setContent($data['content']);
         $post->save();
-        Mage::log($data);
-        return $this->_getLocation($post);
     }
 
-    public function _multiCreate(array $data)
+    public
+    function _multiCreate(array $data)
     {
         foreach ($data as $item) {
             $post = Mage::getModel("simpleblog/post");
@@ -94,7 +96,6 @@ class Antonsbox_Simpleblog_Model_Api2_Restapi_Rest_Guest_V1
             $post->setTitle($item['title']);
             $post->setContent($item['content']);
             $post->save();
-            Mage::log($item);
         }
     }
 }

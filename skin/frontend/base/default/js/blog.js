@@ -179,7 +179,7 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     headers.append('accept', 'application/json');
                     var opts = new http_1.RequestOptions();
                     opts.headers = headers;
-                    this.http.get('http://magento1.tst/api/rest/simpleblog/posts/multi', opts).subscribe(function (res) {
+                    this.http.get(location.origin + '/api/rest/simpleblog/posts/multi', opts).subscribe(function (res) {
                         _this.data = res.json();
                         // this.outParsed = this.data.split('');
                         JSON.parse(_this.data).forEach(function (items) {
@@ -193,7 +193,7 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     headers.append('Content-Type', 'application/json; charset=utf-8');
                     var opts = new http_1.RequestOptions();
                     opts.headers = headers;
-                    this.http.post('http://magento1.tst/api/rest/simpleblog/posts/multi', decodeURI(JSON.stringify(data)), opts)
+                    this.http.post(location.origin + '/api/rest/simpleblog/posts/multi', decodeURI(JSON.stringify(data)), opts)
                         .subscribe(function (res) {
                         // this.response = res.json();
                     });

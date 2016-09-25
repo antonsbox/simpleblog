@@ -4,11 +4,5 @@
         <reference name="root">
             <action method="setTemplate"><template>simple_blog/edit.phtml</template></action>
         </reference>
-
     </simpleblog_test_edit>
-    <simpleblog_test_view>
-        <reference name="content">
-            <block type="simpleblog/view" name="post.content" template="simple_blog/view.phtml"/>
-        </reference>
-    </simpleblog_test_view>
 </layout>
