@@ -204,13 +204,21 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     headers.append('Content-Type', 'application/json; charset=utf-8');
                     var opts = new http_1.RequestOptions();
                     opts.headers = headers;
-                    this.http.put('http://magento1.tst/api/rest/simpleblog/read', decodeURI(JSON.stringify(data)), opts)
+                    this.http.put(location.origin + '/api/rest/simpleblog/read', decodeURI(JSON.stringify(data)), opts)
                         .subscribe(function (res) {
                         // this.response = res.json();
                     });
-                    // console.log(JSON.stringify(data))
                 };
-                SimpleBlogApp.prototype.deleteRequest = function () {
+                SimpleBlogApp.prototype.deleteRequest = function (id) {
+                    var headers = new http_1.Headers();
+                    headers.append('accept', 'application/json');
+                    headers.append('Content-Type', 'application/json; charset=utf-8');
+                    var opts = new http_1.RequestOptions();
+                    opts.headers = headers;
+                    this.http.delete(location.origin + 'api/rest/simpleblog/' + id.toString(), opts)
+                        .subscribe(function (res) {
+                        // this.response = res.json();
+                    });
                 };
                 SimpleBlogApp.prototype.ngOnInit = function () {
                     this.readRequest();
@@ -268,6 +276,7 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                                 _this.posts.forEach(function (p) {
                                     if (sp.id == p.post_id) {
                                         index = _this.posts.indexOf(p);
+                                        _this.deleteRequest(p.post_id);
                                         _this.posts.splice(index, index);
                                         if (index == 0)
                                             _this.posts.splice(index, 1);
@@ -276,10 +285,9 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                             }
                         });
                         this.selectedPosts.splice(0, this.selectedPosts.length);
-                        this.posts.forEach(function (p) {
-                        });
                     }
                     else {
+                        this.deleteRequest(this.posts[this.selectedIndex].post_id);
                         this.posts.splice(this.selectedIndex, 1);
                         this.valueRequire = false;
                         this.newPostPressed = false;
@@ -352,6 +360,7 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                         if ((data.length > 0) && !(title.value == null)) {
                             this.posts[this.selectedIndex].title = title.value;
                             this.posts[this.selectedIndex].content = data;
+                            this.updateRequest(this.posts[this.selectedIndex]);
                             this.valueRequire = false;
                             this.newPostPressed = false;
                             this.selectedIndex = -1;
