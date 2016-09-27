@@ -170,6 +170,8 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     this.isNewPost = false;
                     this.createData = '{';
                     this.delimiter = '';
+                    this.isError = false;
+                    this.errorText = '';
                     this.http = http;
                     this.posts = [];
                 }
@@ -181,13 +183,17 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     opts.headers = headers;
                     this.http.get(location.origin + '/api/rest/simpleblog/posts/multi', opts).subscribe(function (res) {
                         _this.data = res.json();
-                        // this.outParsed = this.data.split('');
+                        _this.posts.splice(0, _this.posts.length);
                         JSON.parse(_this.data).forEach(function (items) {
                             _this.posts.push(new SimpleBlogPost(decodeURI(items[0].title), decodeURI(items[0].content), items[0].post_id, decodeURI(items[0].created)));
                         });
+                    }, function (err) {
+                        _this.errorText = err.toString();
+                        _this.isError = true;
                     });
                 };
                 SimpleBlogApp.prototype.createRequest = function (data) {
+                    var _this = this;
                     var headers = new http_1.Headers();
                     headers.append('accept', 'application/json');
                     headers.append('Content-Type', 'application/json; charset=utf-8');
@@ -195,10 +201,15 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     opts.headers = headers;
                     this.http.post(location.origin + '/api/rest/simpleblog/posts/multi', decodeURI(JSON.stringify(data)), opts)
                         .subscribe(function (res) {
-                        // this.response = res.json();
+                        _this.posts.push(data);
+                        _this.readRequest();
+                    }, function (err) {
+                        _this.errorText = err.toString();
+                        _this.isError = true;
                     });
                 };
                 SimpleBlogApp.prototype.updateRequest = function (data) {
+                    var _this = this;
                     var headers = new http_1.Headers();
                     headers.append('accept', 'application/json');
                     headers.append('Content-Type', 'application/json; charset=utf-8');
@@ -206,10 +217,13 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     opts.headers = headers;
                     this.http.put(location.origin + '/api/rest/simpleblog/read', decodeURI(JSON.stringify(data)), opts)
                         .subscribe(function (res) {
-                        // this.response = res.json();
+                    }, function (err) {
+                        _this.errorText = err.toString();
+                        _this.isError = true;
                     });
                 };
                 SimpleBlogApp.prototype.deleteRequest = function (id) {
+                    var _this = this;
                     var headers = new http_1.Headers();
                     headers.append('accept', 'application/json');
                     headers.append('Content-Type', 'application/json; charset=utf-8');
@@ -217,7 +231,10 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     opts.headers = headers;
                     this.http.delete(location.origin + '/api/rest/simpleblog/' + id.toString(), opts)
                         .subscribe(function (res) {
-                        // this.response = res.json();
+                        _this.readRequest();
+                    }, function (err) {
+                        _this.errorText = err.toString();
+                        _this.isError = true;
                     });
                 };
                 SimpleBlogApp.prototype.ngOnInit = function () {
@@ -276,10 +293,10 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                                 _this.posts.forEach(function (p) {
                                     if (sp.id == p.post_id) {
                                         index = _this.posts.indexOf(p);
-                                        _this.deleteRequest(p.post_id);
                                         _this.posts.splice(index, index);
                                         if (index == 0)
                                             _this.posts.splice(index, 1);
+                                        _this.deleteRequest(p.post_id);
                                     }
                                 });
                             }
@@ -348,8 +365,8 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                             this.newPostPressed = false;
                             this.selectedIndex = -1;
                             this.isNewPost = false;
-                            this.posts.push(new SimpleBlogPost(title.value, data));
-                            this.createRequest(this.posts[this.posts.length - 1]);
+                            var post = new SimpleBlogPost(title.value, data);
+                            this.createRequest(post);
                         }
                         else {
                             this.valueRequire = true;
@@ -388,7 +405,7 @@ System.register(["@angular/platform-browser-dynamic", "@angular/core", "@angular
                     core_1.Component({
                         selector: 'simple-blog',
                         directives: [common_1.FORM_DIRECTIVES, CKEDITOR, PostRow],
-                        template: "<div class=\"ui container segment\">\n    <div *ngIf=\"!newPostPressed\">\n        <div class=\"ui container\">\n            <div class=\" ui clearing segment\">\n                <h1 class=\"ui header\">Simple Blog\n                    <div *ngIf=\"selected\">\n                        <button (click)=\"deletePost()\" class=\"ui right floated primary button\">Delete</button>\n                    </div>\n                    <button (click)=\"newPost(true)\" class=\"ui right floated primary button\">Add New Post</button>\n                </h1>\n            </div>\n        </div>\n        <table class=\"ui striped selectable celled table\">\n            <thead>\n            <tr>\n                <th></th>\n                <th>Title</th>\n                <th>Created at</th>\n                <th>Action</th>\n            </tr>\n            </thead>\n            <tr (select)=\"onSelect($event)\" (edit)=\"editPost($event)\" *ngFor=\"let post of posts\" [blog-tr]=\"post\"></tr>\n        </table>\n    </div>\n    <div *ngIf=\"newPostPressed\">\n        <div class=\"ui container\">\n            <div class=\" ui clearing segment\">\n                <h1 class=\"ui header\">Simple Blog - Edit\n                    <button (click)=\"savePost(title)\" class=\"ui right floated primary button\">Save</button>\n                    <button (click)=\"deletePost()\" class=\"ui right floated primary button\">Delete</button>\n                    <button (click)=\"resetPost()\" class=\"ui right floated primary button\">Reset</button>\n                    <button (click)=\"backToList()\" class=\"ui right floated primary button\">Back</button>\n                </h1>\n            </div>\n            <form #editForm=\"ngForm\" class=\"ui form\">\n                <div ngControlGroup=\"name\" #name=\"ngForm\">\n                    <label><h3>Title*</h3></label><input ngControl=\"title\" [(ngModel)]=\"selectedTitle\" type=\"text\"\n                                                         #title=\"ngForm\">\n                </div>\n            </form>\n            <h3>Description*</h3>\n            <div *ngIf=\"valueRequire\">\n                <h3>Please, fill the required fields </h3>\n                <p></p>\n            </div>\n            <CKEDITOR (editorReady)=\"editPostPress($event)\"></CKEDITOR>\n        </div>\n    </div>\n</div>\n"
+                        template: "<div class=\"ui container segment\">\n    <div *ngIf=\"!newPostPressed\">\n        <div class=\"ui container\">\n            <div class=\" ui clearing segment\">\n                <h1 class=\"ui header\">Simple Blog\n                    <div *ngIf=\"selected\">\n                        <button (click)=\"deletePost()\" class=\"ui right floated primary button\">Delete</button>\n                    </div>\n                    <button (click)=\"newPost(true)\" class=\"ui right floated primary button\">Add New Post</button>\n                </h1>\n            </div>\n        </div>\n        <table class=\"ui striped selectable celled table\">\n            <thead>\n            <tr>\n                <th></th>\n                <th>Title</th>\n                <th>Created at</th>\n                <th>Action</th>\n            </tr>\n            </thead>\n            <tr (select)=\"onSelect($event)\" (edit)=\"editPost($event)\" *ngFor=\"let post of posts\" [blog-tr]=\"post\"></tr>\n        </table>\n         <div *ngIf=\"isError\">\n         <h1>An error has occurred.</h1>\n         <p>{{errorText}}</p>\n         <h3>If you see an 403 error, please do:</h3>\n         Go to magento configuration interface. Go to menu node System->Web Services->\n         REST->Roles-Role API Resources->Guest and mark everything in Simple Blog REST.\n         Then go to node System->Web Services->REST->REST Attributes->Guest \n         and also mark everything in Simple Blog REST. And, after reload this page.        \n         </div>\n    </div>\n    <div *ngIf=\"newPostPressed\">\n        <div class=\"ui container\">\n            <div class=\" ui clearing segment\">\n                <h1 class=\"ui header\">Simple Blog - Edit\n                    <button (click)=\"savePost(title)\" class=\"ui right floated primary button\">Save</button>\n                    <button (click)=\"deletePost()\" class=\"ui right floated primary button\">Delete</button>\n                    <button (click)=\"resetPost()\" class=\"ui right floated primary button\">Reset</button>\n                    <button (click)=\"backToList()\" class=\"ui right floated primary button\">Back</button>\n                </h1>\n            </div>\n            <form #editForm=\"ngForm\" class=\"ui form\">\n                <div ngControlGroup=\"name\" #name=\"ngForm\">\n                    <label><h3>Title*</h3></label><input ngControl=\"title\" [(ngModel)]=\"selectedTitle\" type=\"text\"\n                                                         #title=\"ngForm\">\n                </div>\n            </form>\n            <h3>Description*</h3>\n            <div *ngIf=\"valueRequire\">\n                <h3>Please, fill the required fields </h3>\n                <p></p>\n            </div>\n            <CKEDITOR (editorReady)=\"editPostPress($event)\"></CKEDITOR>\n        </div>\n    </div>\n</div>\n"
                     }), 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], SimpleBlogApp);
